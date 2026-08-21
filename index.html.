@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>통기타 모든 기술 난이도 순위</title>
+  <style>
+    :root {
+      --cream: #fff8e7;
+      --cream-dark: #f8edcc;
+      --yellow: #ffd95a;
+      --yellow-light: #fff0a8;
+      --brown: #5b4027;
+      --brown-light: #806443;
+      --white: #fffdf7;
+      --green: #78966b;
+      --orange: #e79542;
+      --red: #d76b52;
+      --shadow: 0 8px 24px rgba(91, 64, 39, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--brown);
+      font-family:
+        -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+        "Noto Sans KR", "Malgun Gothic", sans-serif;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(100% - 32px, 900px);
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 48px 0 32px;
+      text-align: center;
+    }
+
+    .guitar {
+      font-size: 54px;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 6vw, 48px);
+      line-height: 1.25;
+      letter-spacing: -1.5px;
+    }
+
+    .subtitle {
+      margin: 14px auto 0;
+      max-width: 650px;
+      color: var(--brown-light);
+      font-size: clamp(17px, 3vw, 20px);
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin: 20px 0 28px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 20px;
+      background: var(--white);
+      color: var(--brown);
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 3px 10px rgba(91, 64, 39, 0.09);
+      transition: 0.18s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      background: var(--yellow-light);
+    }
+
+    button.active {
+      background: var(--yellow);
+      box-shadow: 0 5px 14px rgba(183, 135, 27, 0.22);
+    }
+
+    .notice {
+      background: #fffdf5;
+      border: 2px solid var(--yellow-light);
+      border-radius: 20px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
+      font-size: 16px;
+    }
+
+    .notice strong {
+      color: #765321;
+    }
+
+    .skill-list {
+      display: grid;
+      gap: 14px;
+      padding-bottom: 50px;
+    }
+
+    .skill {
+      display: grid;
+      grid-template-columns: 62px 1fr auto;
+      gap: 16px;
+      align-items: center;
+      background: var(--white);
+      border-radius: 20px;
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+      transition: 0.2s ease;
+    }
+
+    .skill:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 11px 28px rgba(91, 64, 39, 0.15);
+    }
+
+    .rank {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--yellow-light);
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .skill-name {
+      margin: 0;
+      font-size: 21px;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .description {
+      margin: 5px 0 0;
+      color: var(--brown-light);
+      font-size: 15px;
+    }
+
+    .difficulty {
+      min-width: 94px;
+      text-align: center;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .beginner {
+      background: #e7f0df;
+      color: #4e7142;
+    }
+
+    .easy {
+      background: #f3efc9;
+      color: #7a6d26;
+    }
+
+    .middle {
+      background: #ffe6b9;
+      color: #9a641f;
+    }
+
+    .hard {
+      background: #ffd1bd;
+      color: #9a4f37;
+    }
+
+    .expert {
+      background: #f2c5bd;
+      color: #8d3c2e;
+    }
+
+    .tips {
+      background: var(--yellow-light);
+      border-radius: 24px;
+      padding: 24px;
+      margin-bottom: 30px;
+    }
+
+    .tips h2 {
+      margin: 0 0 10px;
+      font-size: 24px;
+    }
+
+    .tips ul {
+      margin: 0;
+      padding-left: 24px;
+      font-size: 17px;
+    }
+
+    .tips li + li {
+      margin-top: 6px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--brown-light);
+      font-size: 14px;
+      padding: 0 0 35px;
+    }
+
+    @media (max-width: 650px) {
+      .container {
+        width: min(100% - 22px, 900px);
+      }
+
+      header {
+        padding-top: 30px;
+      }
+
+      .skill {
+        grid-template-columns: 48px 1fr;
+        gap: 12px;
+        padding: 15px;
+      }
+
+      .rank {
+        width: 44px;
+        height: 44px;
+        font-size: 19px;
+      }
+
+      .skill-name {
+        font-size: 19px;
+      }
+
+      .description {
+        font-size: 14px;
+      }
+
+      .difficulty {
+        grid-column: 2;
+        justify-self: start;
+        min-width: auto;
+        padding: 5px 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <div class="guitar" aria-hidden="true">🎸</div>
+      <h1>통기타 모든 기술<br>난이도 순위</h1>
+      <p class="subtitle">
+        처음 배우는 분도 한눈에 볼 수 있도록<br>
+        쉬운 기술부터 어려운 기술까지 정리했어요.
+      </p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="controls" aria-label="난이도 필터">
+      <button class="active" data-filter="all">전체 보기</button>
+      <button data-filter="beginner">초급</button>
+      <button data-filter="easy">초중급</button>
+      <button data-filter="middle">중급</button>
+      <button data-filter="hard">중상급</button>
+      <button data-filter="expert">고급</button>
+    </div>
+
+    <div class="notice">
+      <strong>💡 난이도는 절대적인 기준이 아니에요.</strong><br>
+      손 크기, 리듬감, 연습량, 사용하는 곡에 따라 체감 난이도가 달라질 수 있습니다.
+      아래 순위는 일반적인 학습 순서를 기준으로 한 참고용 목록입니다.
+    </div>
+
+    <section class="skill-list" id="skillList"></section>
+
+    <section class="tips">
+      <h2>🌱 연습 순서 추천</h2>
+      <ul>
+        <li>코드 잡기 → 코드 전환 → 기본 스트로크 순서로 익혀보세요.</li>
+        <li>메트로놈을 사용하면 리듬과 박자를 안정적으로 잡는 데 도움이 됩니다.</li>
+        <li>어려운 기술은 속도보다 정확한 자세와 깨끗한 소리를 먼저 목표로 하세요.</li>
+        <li>한 번에 모든 기술을 익히기보다 좋아하는 곡에 필요한 기술부터 배우면 더 재미있어요.</li>
+      </ul>
+    </section>
+
+    <footer>
+      통기타 기술 난이도 가이드 · 개인의 학습 속도에 따라 달라질 수 있습니다.
+    </footer>
+  </main>
+
+  <script>
+    const skills = [
+      {
+        name: "개방현 소리 내기",
+        desc: "줄을 하나씩 튕겨 깨끗한 소리를 내는 기본 연습",
+        level: "beginner",
+        label: "초급"
+      },
+      {
+        name: "기본 다운 스트로크",
+        desc: "피크나 손가락으로 일정하게 아래로 내려치는 주법",
+        level: "beginner",
+        label: "초급"
+      },
+      {
+        name: "기본 코드 잡기",
+        desc: "C, G, D, A, E, Em, Am 등 기초 코드를 잡는 기술",
+        level: "beginner",
+        label: "초급"
+      },
+      {
+        name: "코드 전환",
+        desc: "곡의 박자에 맞춰 다른 코드로 자연스럽게 이동하기",
+        level: "beginner",
+        label: "초급"
+      },
+      {
+        name: "업 스트로크",
+        desc: "아래에서 위로 올라오는 스트로크를 안정적으로 연주하기",
+        level: "beginner",
+        label: "초급"
+      },
+      {
+        name: "8비트 스트로크",
+        desc: "다운·업을 조합해 가장 많이 쓰이는 기본 리듬 만들기",
+        level: "easy",
+        label: "초중급"
+      },
+      {
+        name: "팜 뮤트",
+        desc: "오른손 손바닥으로 현을 살짝 눌러 짧고 묵직한 소리 만들기",
+        level: "easy",
+        label: "초중급"
+      },
+      {
+        name: "아르페지오",
+        desc: "코드를 한 번에 치지 않고 줄을 차례대로 뜯는 주법",
+        level: "easy",
+        label: "초중급"
+      },
+      {
+        name: "해머링 온",
+        desc: "한 번 피킹한 뒤 손가락으로 프렛을 눌러 음을 연결하기",
+        level: "middle",
+        label: "중급"
+      },
+      {
+        name: "풀링 오프",
+        desc: "손가락을 떼면서 다음 음을 자연스럽게 이어가기",
+        level: "middle",
+        label: "중급"
+      },
+      {
+        name: "16비트 스트로크",
+        desc: "빠른 다운·업 조합으로 세밀한 리듬을 표현하기",
+        level: "middle",
+        label: "중급"
+      },
+      {
+        name: "뮤트 스트로크",
+        desc: "왼손 또는 오른손으로 현을 막아 퍼커시브한 리듬 만들기",
+        level: "middle",
+        label: "중급"
+      },
+      {
+        name: "바레 코드",
+        desc: "한 손가락으로 여러 줄을 동시에 눌러 F 코드 등을 연주하기",
+        level: "middle",
+        label: "중급"
+      },
+      {
+        name: "슬라이드",
+        desc: "손가락을 지판 위에서 이동시켜 음을 부드럽게 연결하기",
+        level: "hard",
+        label: "중상급"
+      },
+      {
+        name: "벤딩",
+        desc: "줄을 밀거나 당겨 음정을 변화시키는 표현 기법",
+        level: "hard",
+        label: "중상급"
+      },
+      {
+        name: "트래비스 피킹",
+        desc: "엄지로 베이스를 유지하면서 손가락으로 멜로디를 연주하기",
+        level: "hard",
+        label: "중상급"
+      },
+      {
+        name: "핑거스타일 독립 주법",
+        desc: "엄지·검지·중지·약지를 독립적으로 움직이며 여러 파트를 동시에 연주",
+        level: "hard",
+        label: "중상급"
+      },
+      {
+        name: "퍼커시브 핑거스타일",
+        desc: "기타 몸통을 두드리는 소리와 멜로디를 동시에 표현",
+        level: "expert",
+        label: "고급"
+      },
+      {
+        name: "탭핑",
+        desc: "오른손 손가락으로 지판을 직접 두드려 음을 만드는 고난도 주법",
+        level: "expert",
+        label: "고급"
+      },
+      {
+        name: "하이브리드 피킹",
+        desc: "피크와 손가락을 동시에 사용해 여러 음을 독립적으로 연주",
+        level: "expert",
+        label: "고급"
+      },
+      {
+        name: "고속 얼터네이트 피킹",
+        desc: "다운·업 피킹을 매우 빠르고 일정하게 반복하는 기술",
+        level: "expert",
+        label: "고급"
+      },
+      {
+        name: "핑거스타일 멜로디·베이스 독립",
+        desc: "베이스, 코드, 멜로디를 동시에 분리해 연주하는 고난도 기술",
+        level: "expert",
+        label: "고급"
+      },
+      {
+        name: "슬랩·탭·바디 퍼커션 복합 주법",
+        desc: "여러 타격음과 멜로디를 동시에 구성하는 최상급 핑거스타일",
+        level: "expert",
+        label: "고급"
+      }
+    ];
+
+    const list = document.getElementById("skillList");
+    const buttons = document.querySelectorAll("[data-filter]");
+
+    function render(filter = "all") {
+      const filtered = filter === "all"
+        ? skills
+        : skills.filter(skill => skill.level === filter);
+
+      list.innerHTML = filtered.map((skill, index) => {
+        const originalRank = skills.indexOf(skill) + 1;
+
+        return `
+          <article class="skill">
+            <div class="rank">${originalRank}</div>
+            <div>
+              <h2 class="skill-name">${skill.name}</h2>
+              <p class="description">${skill.desc}</p>
+            </div>
+            <div class="difficulty ${skill.level}">
+              ${skill.label}
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        buttons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
+        render(button.dataset.filter);
+      });
+    });
+
+    // "다시 고르기" 버튼을 추가하고 누르면 전체 목록으로 돌아갑니다.
+    const resetButton = document.createElement("button");
+    resetButton.textContent = "↩ 다시 고르기";
+    resetButton.addEventListener("click", () => {
+      buttons.forEach(btn => btn.classList.remove("active"));
+      document.querySelector('[data-filter="all"]').classList.add("active");
+      render("all");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    document.querySelector(".controls").appendChild(resetButton);
+
+    render();
+  </script>
+</body>
+</html>
